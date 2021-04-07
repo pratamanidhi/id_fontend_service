@@ -1,37 +1,50 @@
 <template>
   <div>
-    <router-link :to="{ name: 'Create' }" class="button is-success mt-5"
-      >Add New</router-link
-    >
+    <b-button variant="success" :to="{ name: 'Insert' }" class="button is-success mt-5"
+      >Add New</b-button>
     <table class="table is-striped is-bordered mt-2 is-fullwidth">
       <thead>
         <tr>
           <th>ID</th>
           <th>Product Name</th>
           <th>Price</th>
-          <th class="has-text-centered">Actions</th>
+          <th class="has-text-centered"  colspan="3">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id_tambal_ban">
           <td>{{item.id_tambal_ban}}</td>
-          <td>{{ item.latitude }}</td>
-          <td>{{ item.longitude }}</td>
+          <td>{{ item.nama_tambal_ban }}</td>
+          <td>{{ item.harga }}</td>
           <td class="has-text-centered">
-            <router-link
+            <b-button
               :to="{ name: 'Edit', params: { id: item.product_id } }"
-              class="button is-info is-small"
-              >Edit</router-link
-            >
-            <a
-              class="button is-danger is-small"
-              @click="deleteProduct(item.id_tambal_ban)"
-              >Delete</a
-            >
+              variant="primary">
+              <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
+              Edit
+            </b-button>
+          </td>
+          <td class="has-text-centered">
+            <div>
+              
+              <b-button variant="info" v-b-modal.my-modal>
+                <b-icon icon="info-circle" aria-hidden="true"></b-icon>
+                Show Modal
+              </b-button>
+            </div>
+          </td>
+          <td class="has-text-centered">
+              <b-button variant="danger" @click="deleteProduct(item.id_tambal_ban)">
+                <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                Delete
+              </b-button>
           </td>
         </tr>
       </tbody>
     </table>
+    
+    <b-modal id="my-modal">Hello From My Modal!</b-modal>
+    
   </div>
 </template>
  
@@ -41,12 +54,13 @@ import axios from "axios";
  
 export default {
   name: "ListOfClient",
-  data() {
+  data : function() {
     return {
       items: [],
     };
   },
- 
+
+
   created() {
     this.getProducts();
   },
@@ -69,9 +83,11 @@ export default {
         console.log(err);
       }
     },
+
   },
 };
 </script>
  
 <style>
+
 </style>

@@ -12,5 +12,5 @@ export default {
  
 <style>
 /* import style bulma */
-@import "~bulma/css/bulma.css";
+
 </style>
